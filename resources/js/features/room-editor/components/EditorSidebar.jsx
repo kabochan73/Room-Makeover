@@ -17,7 +17,7 @@ export default function EditorSidebar({
     const removeItem = useEditorStore((state) => state.removeItem);
 
     return (
-        <aside className="flex w-64 shrink-0 flex-col justify-between border-r border-gray-200 bg-white">
+        <aside className="flex w-full shrink-0 flex-col justify-between border-b border-gray-200 bg-white lg:w-64 lg:border-b-0 lg:border-r">
             <div className="space-y-6 p-4">
                 <p className="border-b border-gray-200 pb-4 text-2xl font-bold text-gray-800">
                     {name}

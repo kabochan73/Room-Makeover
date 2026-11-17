@@ -44,7 +44,7 @@ export default function Edit({ roomDesign, furnitureCatalog }) {
         <AuthenticatedLayout>
             <Head title={roomDesign.name} />
 
-            <div className="flex">
+            <div className="flex flex-col lg:flex-row">
                 <EditorSidebar
                     furnitureCatalog={furnitureCatalog}
                     mode={mode}
@@ -54,7 +54,7 @@ export default function Edit({ roomDesign, furnitureCatalog }) {
                     onDestroy={destroy}
                 />
 
-                <div className="flex-1 self-stretch overflow-hidden bg-white">
+                <div className="h-[60vh] overflow-hidden bg-white lg:h-auto lg:flex-1 lg:self-stretch">
                     <RoomCanvas
                         ref={glRef}
                         roomTemplate={roomDesign.room_template}
