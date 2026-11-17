@@ -1,58 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Room Makeover
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+ブラウザの中で部屋の模様替えができるアプリ。部屋を選んで、家具を置いて、雰囲気を確かめれる。気に入ったレイアウトは保存して、リンクで共有もできる。
 
-## About Laravel
+three.js（React Three Fiber）を触ってみたくて作ったプロトタイプ。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+スーモみたいな部屋探しサイトの部屋詳細ページで、写真+3Dモデルがあればいいなと思い、シェア機能をつけた。
+不動産屋が実際の間取りを参考に作った部屋をシェア。そしてURLから自分のページにコピーし、自由に家具を配置しどんな感じか確かめられるのが理想。
+3Dモデルで実際の施設の再現を簡単に作れるアプリがあれば、色々な施設のホームページに+αで使えるかもと思っている。2Dでの施設紹介でも問題はないが。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## デモ
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+https://app-production-24780367.up.railway.app/
 
-## Learning Laravel
+[サンプルのレイアウト（シェア機能のデモ）](https://app-production-24780367.up.railway.app/share/4d1f3a34-ff47-4536-b372-5ada33195aeb)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ドキュメント
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+構想・DB設計・ルート設計・デザインガイドライン・インフラ構成など、詳細な設計は [docs/](docs) 以下を参照。
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 機能
 
-## Agentic Development
+1. **部屋を選ぶ** — 6種類の部屋テンプレートから選択
+2. **家具を配置** — ソファ・椅子・テーブル・ベッド・デスク・本棚・観葉植物・ラグをドラッグで配置、回転・削除も可能
+3. **保存** — レイアウトをダッシュボードに保存。シェア機能で公開URLを発行して誰でも閲覧でき、気に入ったレイアウトは自分のダッシュボードにコピーできる
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 技術スタック
+
+- バックエンド：Laravel + Inertia.js
+- フロントエンド：React + React Three Fiber（`@react-three/drei`）+ Zustand
+- DB：PostgreSQL
+- 認証：name + password の簡易ログイン
+- インフラ：Docker、Railway（Postgres + Volumeでサムネイル永続化）
+- CI/CD：GitHub Actions（テスト → `main`へのpushで自動デプロイ）
+
+## ローカル開発
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+cp .env.example .env
+docker compose up -d --build
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate --seed
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+http://localhost:8000 でアクセスできる。フロントの変更は `node` コンテナが `npm run dev` でHMRしている。
 
-## Contributing
+## テスト
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan test
+```
 
-## Code of Conduct
+## ディレクトリ構成（フロントエンド）
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+resources/js/
+  Pages/        # Inertiaのページ（ルーティング単位、薄く保つ）
+  features/     # 画面の塊ごとにcomponents/hooks/storeをまとめる（auth, dashboard, room-picker, room-editor, welcome）
+  shared/       # 複数featureで使う共通UI・レイアウト
+```
 
-## Security Vulnerabilities
+詳しくは [docs/frontend_design.md](docs/frontend_design.md) を参照。
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## アセット
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+家具の3Dモデルは [Kenney.nl Furniture Kit](https://kenney.nl/assets/furniture-kit)（CC0ライセンス）を使用。
