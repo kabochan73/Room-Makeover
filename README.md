@@ -10,9 +10,10 @@ three.js（React Three Fiber）を触ってみたくて作ったプロトタイ�
 
 ## デモ
 
+URL
 https://app-production-24780367.up.railway.app/
-
-[サンプルのレイアウト（シェア機能のデモ）](https://app-production-24780367.up.railway.app/share/4d1f3a34-ff47-4536-b372-5ada33195aeb)
+シェア機能のデモ
+https://app-production-24780367.up.railway.app/share/4d1f3a34-ff47-4536-b372-5ada33195aeb
 
 ## ドキュメント
 
