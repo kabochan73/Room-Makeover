@@ -1,8 +1,8 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import GuestLayout from '@/Layouts/GuestLayout';
+import InputError from '@/shared/ui/InputError';
+import InputLabel from '@/shared/ui/InputLabel';
+import PrimaryButton from '@/shared/ui/PrimaryButton';
+import TextInput from '@/shared/ui/TextInput';
+import GuestLayout from '@/shared/layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function ConfirmPassword() {
