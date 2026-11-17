@@ -28,7 +28,7 @@ enum RoomTemplate: string
      */
     public function defaultName(): string
     {
-        return "{$this->label()} Room";
+        return $this->label();
     }
 
     /**
