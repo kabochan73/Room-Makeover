@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
+ENV VITE_APP_NAME="Room Makeover"
 RUN npm run build
 
 # --- PHPアプリケーションステージ ---
