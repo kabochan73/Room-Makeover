@@ -25,6 +25,13 @@ export default function Login({ status }) {
         <GuestLayout>
             <Head title="Log in" />
 
+            <div className="mb-8">
+                <h1 className="text-2xl font-bold text-gray-900">Log in</h1>
+                <p className="mt-1 text-sm text-gray-600">
+                    Welcome back! Please enter your details.
+                </p>
+            </div>
+
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
                     {status}
