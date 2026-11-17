@@ -3,9 +3,13 @@ import { Clone, OrbitControls, useGLTF } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 
 const DEMO_ITEMS = [
-    { modelPath: 'models/furniture/sofa-1.glb', scale: 1.5, position: [0.8, 0, -1], rotationY: 0 },
-    { modelPath: 'models/furniture/table-3.glb', scale: 1.3, position: [0.8, 0, 0.6], rotationY: 0 },
-    { modelPath: 'models/furniture/chair-2.glb', scale: 1.8, position: [-1.4, 0, 0.4], rotationY: Math.PI / 4 },
+    { modelPath: 'models/furniture/rug-2.glb', scale: 2.4, position: [-0.4, 0.01, 1.8], rotationY: 0 },
+    { modelPath: 'models/furniture/sofa-1.glb', scale: 1.5, position: [0, 0, -1], rotationY: 0 },
+    { modelPath: 'models/furniture/table-3.glb', scale: 1.3, position: [0.8, 0, 0.8], rotationY: 0 },
+    { modelPath: 'models/furniture/chair-2.glb', scale: 1.8, position: [-1.3, 0, 0], rotationY: Math.PI / 2 },
+    { modelPath: 'models/furniture/chair-2.glb', scale: 1.8, position: [-1.3, 0, 0.6], rotationY: Math.PI / 2 },
+    { modelPath: 'models/furniture/bookcase-1.glb', scale: 2, position: [-2, 0, -2], rotationY: 0 },
+    { modelPath: 'models/furniture/bookcase-1.glb', scale: 2, position: [-1, 0, -2], rotationY: 0 },
 ];
 
 function StaticFurniture({ modelPath, scale, position, rotationY }) {
